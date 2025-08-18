@@ -15,3 +15,17 @@ src/modules/TradingRules/tradingRules.module.ts
 src/modules/TradingRules/tradingRules.schema.ts
 src/modules/TradingRules/tradingRules.service.ts
 src/modules/TradingRules/dto/tradingRules.dto.ts
+
+
+
+ if (newclient) {
+              if (data.order.orderStatus === 'EXPIRED' && data.order.orderType === 'TAKE_PROFIT_MARKET' || 'STOP_MARKET' &&  data.order.timeInForce === 'GTE_GTC' ) {
+               // console.log('We received cancelled or expired: for extra order', data.order.order);
+               setTimeout(() => {
+                processOpenOrders(newclient,clientId);
+                }, 5000);
+              }
+            // if (data.order.orderStatus === 'FILLED' && data.order.realisedProfit === 0 )  {
+         
+             // }
+            }

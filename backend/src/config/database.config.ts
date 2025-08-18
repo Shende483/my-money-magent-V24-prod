@@ -13,7 +13,7 @@ export const DatabaseConfig = MongooseModule.forRootAsync({
       }
 
       console.log('✅ Successfully connected to MongoDB Atlas');
-      return { uri, useNewUrlParser: true, useUnifiedTopology: true };
+      return { uri };
     } catch (error) {
       console.error('❌ Failed to connect to MongoDB Atlas:', error.message);
       throw error;
