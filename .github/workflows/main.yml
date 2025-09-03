@@ -1,4 +1,4 @@
-name: Deploy Frontend & Backend
+name: Deploy Frontend1 & Backend
 
 on:
   push:
@@ -19,39 +19,39 @@ jobs:
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > frontend1/.env
 
-      - name: Install & build frontend
+      - name: Install & build frontend1
         run: |
-          cd frontend
+          cd frontend1
           npm ci
           npm run build
 
       - name: Upload frontend artifact
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-dist
-          path: frontend/dist
+          name: frontend1-dist
+          path: frontend1/dist
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-frontend
+    needs: build-frontend1
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/download-artifact@v4
         with:
-          name: frontend-dist
-          path: ./frontend-dist
+          name: frontend1-dist
+          path: ./frontend1-dist
 
       - name: Setup SSH key
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key
           chmod 600 key
 
-      - name: Copy frontend to VPS
+      - name: Copy frontend1 to VPS
         run: |
           rsync -az --delete -e "ssh -i key -o StrictHostKeyChecking=no" \
-            ./frontend-dist/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_APP_DIR }}/frontend/
+            ./frontend1-dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_APP_DIR }}/frontend1/
 
       - name: Copy backend source
         run: |
