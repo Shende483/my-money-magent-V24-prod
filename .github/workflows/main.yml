@@ -17,7 +17,7 @@ jobs:
 
       - name: Create frontend .env
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > frontend/.env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" > frontend1/.env
 
       - name: Install & build frontend
         run: |
